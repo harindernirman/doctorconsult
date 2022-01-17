@@ -1,9 +1,13 @@
 import React from 'react'
-import { NavLink  } from 'react-router-dom'
-import { useState  } from 'react'
+import { useNavigate  } from 'react-router-dom'
+import { useState  } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Register = () => {
 
+    const navigate = useNavigate();
     const [inpval, setINP] = useState({
         pname:"",
         pemail:"",
@@ -46,15 +50,16 @@ const Register = () => {
       console.log("error")
     }
     else {
-      alert("data added");
-      console.log("data added")
+        console.log("data added");
+        toast("Patient Data Updated");
+        setTimeout(() => {
+            navigate("/");
+          }, 2000);
     //   setUdata(data);
-    //   navigate("/");
     }
  }
     return (
         <div className='container'>
-            <NavLink to="/">Home</NavLink>
             <form onSubmit={addinpdata} className='mt-2'>
                 <div className="row" >
                     <div className="mb-3 col-lg-6 col-md-6 col-12">
@@ -81,6 +86,8 @@ const Register = () => {
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
+            <ToastContainer autoClose={1000}
+/>
         </div>
     )
 }
